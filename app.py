@@ -1,18 +1,21 @@
 from flask import Flask, render_template, request
+from database import init_db, guardar_grup, carregar_grup
 
 app = Flask(__name__)
+
+init_db()
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    grup = []
-
     if request.method == "POST":
-        noms = request.form.get("noms")
+        noms_text = request.form.get("noms")
 
-        if noms:
-            grup = [nom.strip() for nom in noms.split(",")]
+        if noms_text:
+            grup = [nom.strip() for nom in noms_text.split(",")]
+            guardar_grup(grup)
 
+    grup = carregar_grup()
     return render_template("index.html", grup=grup)
 
 
