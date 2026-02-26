@@ -6,7 +6,7 @@ DB_NAME = "grup.db"
 def get_connection():
     return sqlite3.connect(DB_NAME)
 
-
+#Inicialitzem l'estructura de la BD
 def init_db():
     conn = get_connection()
     cursor = conn.cursor()
@@ -21,7 +21,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-
+#Funció per inserir el grup a la BD
 def guardar_grup(noms):
     conn = get_connection()
     cursor = conn.cursor()
@@ -34,7 +34,7 @@ def guardar_grup(noms):
     conn.commit()
     conn.close()
 
-
+# Agafem els noms guardats a la BD
 def carregar_grup():
     conn = get_connection()
     cursor = conn.cursor()
